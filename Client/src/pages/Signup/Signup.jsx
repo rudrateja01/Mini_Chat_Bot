@@ -1,7 +1,7 @@
 import "./SignupStyle.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useSignup from "../../Hooks/useSignup";
+import useSignup from "../../hooks/useSignup";
 import man from "../../assets/logos/man.png";
 import Hubly from "../../assets/logos/hubly.png";
 
