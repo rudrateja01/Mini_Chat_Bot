@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useChat } from "../../../context/ChatContext";
-import "./contactCenter.css";
+import "./ContactCenter.css";
 import { Icon } from "@iconify/react";
 import homeIcon from "@iconify/icons-mdi/home";
 import sendIcon from "@iconify/icons-mdi/send";

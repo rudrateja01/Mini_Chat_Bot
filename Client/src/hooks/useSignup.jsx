@@ -18,7 +18,6 @@ const useSignup = () => {
       });
 
       if (res.status === 201) {
-        // Return user object including role
         return res.data.user;
       }
     } catch (err) {
