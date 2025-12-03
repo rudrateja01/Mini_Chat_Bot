@@ -1,0 +1,75 @@
+.analytics-root {
+  padding: 30px;
+  width: 70%;
+  height: 100vh;
+}
+
+.analytics-title {
+  font-size: 25px;
+  margin-bottom: 30px;
+  color: #6A6B70;
+}
+
+.analytics-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+}
+
+.analytics-left {
+  width: 70%;
+}
+.linechart-card {
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.linechart-card h2 {
+  color: #00D907;
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+
+.analytics-left h2 {
+  margin: 0 0 10px 0;
+  font-size: 26px;
+  color: #00D907;
+}
+
+.analytics-left p {
+  margin: 0;
+  font-size: 15px;
+  opacity: 0.8;
+  line-height: 1.5;
+  color: #000000;
+}
+.analytics-left .Total-Chats{
+  margin: 0 0 10px 0;
+  font-size: 26px;
+  color: #000000;
+}
+
+.pie-wrapper {
+  width: 20%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.analytics-value {
+  font-size: 38px;
+  width: 20%;
+  text-align: right;
+  color: #00D907;
+}
+
+.analytics-chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}

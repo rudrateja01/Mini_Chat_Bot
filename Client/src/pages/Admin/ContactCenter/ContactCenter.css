@@ -1,0 +1,657 @@
+.cc-root {
+  display: flex;
+  height: 100vh;
+  padding: 20px;
+  background: #FAFBFC;
+}
+
+/* LEFT PANEL */
+.cc-left {
+  width: 28%;
+  border-right: 1px solid #ddd;
+  padding-right: 10px;
+  overflow-y: auto;
+}
+
+.cc-left #page{
+  color: #6A6B70;
+  font-size: 20px;
+  margin-bottom: 40px;
+  font-weight: 600;
+}
+.cc-left span{
+  border-bottom: 3px solid #B9BABA;
+  color: #888888;
+  font-size: 20px;
+}
+
+.cc-chat-item {
+  display: flex;
+  align-items: flex-start; 
+  gap: 10px;               
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border-radius: 50px;      
+  transition: background 0.2s;
+  background-color: #EFEFEF;
+}
+
+.cc-chat-item:hover {
+  background: #f5f5f5;
+}
+
+.cc-chat-item.active {
+  background: #e3f2fd;
+}
+
+.cc-chat-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;       
+  background-color: #ff7f50;
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cc-chat-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cc-chat-title {
+  font-weight: 600;
+  margin: 0;
+  font-size: 14px;
+  color: #5E9BD5;
+}
+
+.cc-chat-preview {
+  margin: 2px 0 0 0;
+  font-size: 15px;
+  color: #9A9B9D;
+}
+
+
+/* CENTER PANEL */
+.cc-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #ccc;
+  height: 95vh;
+  background: #f9f9f9;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ======================= TOP ======================= */
+.cc-center-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+  background: #fff;
+  font-weight: 600;
+}
+
+.cc-center-header .ticket-id {
+  color: #86898C;
+}
+
+.cc-center-header .home-icon {
+  font-size: 25px;
+  cursor: pointer;
+  color: #424242;
+}
+
+/* ======================= DATE DIVIDER ======================= */
+.chat-date-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0;
+  color: #8C8E92;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: capitalize;
+  gap: 10px;
+}
+
+.chat-date-divider::before,
+.chat-date-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #ccc;
+}
+
+/* ================== CHAT MESSAGES ======================= */
+.cc-chat-messages {
+  flex: 1;
+  padding: 12px;
+  justify-content: flex-end;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  gap: 8px;
+}
+
+.chat-msg-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.chat-sent {
+  display: flex;
+  justify-content: flex-end;
+}
+.chat-received {
+  display: flex;
+  justify-content: flex-start;
+}
+.chat-date-divider {
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+  margin: 10px 0;
+}
+
+.cc-chat-input {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  border-top: 1px solid #ddd;
+}
+
+.chat-avatar {
+  width: 40px;
+  height: 40px;
+  background: #FF8C42; 
+  color: #fff;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+  font-size: 16px;
+}
+
+.chat-msg-content {
+  color: #000;
+  border-radius: 12px 12px 12px 0;
+  padding: 8px;
+  word-wrap: break-word;
+}
+
+.chat-index {
+  font-size: 13px;
+  color: #5E9BD5;
+}
+
+.chat-msg {
+  border-radius: 12px;
+  font-size: 16px;
+  line-height: 1.4;
+  max-width: none;
+  padding: 8px 1px;
+}
+
+.chat-sender-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #5E9BD5;
+  text-align: right;
+}
+.chat-msg.sent {
+  text-align: right;
+  color: #9A9B9D;
+  background-color: transparent;
+}
+
+.chat-msg.received {
+  align-self: flex-start;
+  color: #9A9B9D;
+  background-color: transparent;
+
+}
+
+.no-messages {
+  text-align: center;
+  color: #888;
+  margin-top: 20px;
+}
+
+/* ======================= INPUT BOX ======================= */
+.cc-chat-input {
+  position: relative;
+  width: 100%;
+  padding: 12px 15px;
+  background: #fff;
+  border-top: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+}
+
+.cc-chat-input textarea {
+  width: 100%;
+  resize: none;
+  padding: 12px 45px 12px 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  border: 2px solid #D1D6DA;
+  min-height: 90px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #8C8E92;
+}
+
+.send-icon {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  cursor: pointer;
+  color: #D1D6DA;
+  transition: color 0.2s;
+}
+
+.send-icon:hover {
+  color: #001f8b;
+}
+
+
+
+
+/* RIGHT PANEL */
+.cc-right {
+   width: 28%;
+  background: #fff;
+  border-left: 1px solid #e5e5e5;
+  padding: 20px;
+  position: relative;
+}
+.cc-right-scroll {
+  overflow-y: auto;
+  height: 100%;
+}
+
+/* =================== TOP HEADER ================ */
+.cc-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.cc-avatar-big {
+  width: 55px;
+  height: 55px;
+  background: #7b68ee;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.cc-chat-label {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* ======================== SECTION TITLES =================== */
+.cc-title {
+  font-size: 18px;
+  margin: 15px 0 8px;
+  font-weight: 600;
+  color: #184E7F;
+}
+
+.cc-section-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 15px 0;
+}
+
+.detail-box {
+  display: flex;
+  align-items: center;
+  background: #f5f5f5;
+  padding: 10px 15px;
+  border-radius: 15px;
+  gap: 12px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  color: #333;
+  transition: background 0.2s ease;
+}
+
+.detail-box:hover {
+  background: #f0f0f0;
+}
+
+.detail-icon {
+  font-size: 20px;
+  color: #555;
+}
+
+/* ============= TEAMMATE FIELD =================== */
+.cc-teammate-row {
+  position: relative; 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  cursor: pointer;
+   margin-bottom: px;
+}
+
+.cc-teammate-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: #808080;
+  margin: 0;
+}
+
+.cc-teammate-dropdown-btn {
+  width: 40px;
+  height: 35px;
+  font-size: 30px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: #808080;
+}
+
+.cc-teammate-dropdown-btn:hover {
+  background: #dcdcdc;
+}
+
+
+.cc-teammate-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cc-avatar-small {
+  width: 35px;
+  height: 35px;
+  background: #4f73df;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.cc-teammate-dropdown {
+  position: relative;
+  width: 100%;
+  margin-top: 10px;
+}
+
+
+
+/* DROPDOWN LIST */
+.dropdown-options {
+  position: relative;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+  margin-top: 8px;
+  z-index: 1000;
+}
+
+.dropdown-option {
+   padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dropdown-option:hover {
+  background: #f5f5f5;
+}
+.dropdown-option:not(:last-child) {
+  border-bottom: 1px solid #D1D6DA; 
+}
+
+.cc-avatar-small {
+  width: 35px;
+  height: 35px;
+  background: #4f73df;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.dropdown-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-name {
+  font-weight: 500;
+  color: #808080;
+}
+
+/* STATUS BOX ROW */
+.cc-ticket-status-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+
+.cc-ticket-status-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cc-status-icon{
+  color: #808080;
+  font-size: 25px;
+}
+.cc-ticket-status-left .cc-title {
+  font-size: 18px;
+  margin: 0;
+  color: #808080;
+}
+
+.cc-ticket-status-right {
+  display: flex;
+  align-items: center;
+      width: 40px;
+    height: 35px;
+    font-size: 30px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: #808080;
+}
+
+.cc-status-dropdown {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fff;
+  margin-top: 4px;
+}
+
+.cc-status-option {
+  padding: 10px 16px;
+  cursor: pointer;
+  color: #808080;
+}
+
+.cc-status-option:hover {
+  background-color: #f0f0f0;
+}
+
+
+/* ================== pop-up ==================== */
+.assign-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.assign-popup {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  width: 350px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+.assign-popup h3 {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.cancel-btn, .submit-btn {
+  width: 45%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.cancel-btn {
+  background: #e0e0e0;
+}
+
+.submit-btn {
+  background: #2b67f6;
+  color: white;
+}
+
+/* POPUP */
+.cc-popup-overlay {
+  position: absolute;
+  top: 45px;
+  left: 550px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cc-popup {
+  background-color: #FAFBFC;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  text-align: left;
+}
+.popup-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+}
+.cancel-btn {
+  background-color: #AFAFAF;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.submit-btn {
+  background-color: #184E7F;
+  border: none;
+  padding: 6px 10px;
+  color: #fff;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+/* RESTRICTED VIEW */
+.cc-restricted {
+  padding: 10px;
+  text-align: center;
+  color: #ff0000;
+  font-weight: bold;
+  border-radius: 6px;
+  margin-top: 5px;
+}
+
+/*// Restricted-popup */
+.cc-restricted-popup {
+  position: absolute;
+  top:  50%;
+  left: 53.2%;
+  transform: translate(-50%, -50%);
+  background: #fff5f5;
+  padding: 20px;
+  border-radius: 8px;
+  color: #ff0000;
+  font-weight: bold;
+  text-align: center;
+  width: 40%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 10;
+}
+
+.cc-restricted-close-btn {
+  margin-top: 15px;
+  padding: 8px 16px;
+  border: none;
+  background-color: #ff4d4f;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cc-restricted-close-btn:hover {
+  background-color: #d9363e;
+}

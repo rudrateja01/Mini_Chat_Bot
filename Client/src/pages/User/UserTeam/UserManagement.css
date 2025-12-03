@@ -1,0 +1,120 @@
+.user-user-page {
+  font-family: Arial, sans-serif;
+}
+
+.user-user-title {
+  font-size: 20px;
+  margin: 20px;
+  font-weight: 600;
+  color: #6A6B70;
+}
+
+.user-user-table {
+  width: 100%;
+  background: white;
+  border: 1px solid #ddd;
+  overflow: hidden;
+}
+
+.user-table-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px 16px;
+  border-top: 1px solid #eee;
+  gap: 20px;
+}
+
+.user-table-row.user-header {
+  border-top: 1px solid #6A6A6A;
+  border-bottom: 1px solid #6A6A6A;
+}
+
+.user-row-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+}
+
+.user-table-row.user-header span {
+  color: #184E7F;
+  font-weight: 500;
+}
+
+.user-row-left span {
+  color: #020617;
+}
+
+.user-row-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-avatar-initials {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  color: white;
+  background-color: #2d5fb8;
+}
+
+.user-col-avatar {
+  width: 35px;
+}
+
+.user-col-name {
+  width: 120px;
+  text-align: center;
+}
+
+.user-col-phone {
+  width: 120px;
+  text-align: center;
+}
+
+.user-col-email {
+  width: 200px;
+  text-align: center;
+}
+
+.user-col-role {
+  width: 100px;
+  text-align: center;
+}
+
+.user-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+.user-role-admin .user-role-member {
+  color: #020617;
+}
+
+.user-action-buttons {
+  font-size: 22px;
+}
+
+.user-edit-btn {
+  color: #545454;
+  cursor: pointer;
+}
+
+.user-delete-btn {
+  color: #545454;
+  cursor: pointer;
+}
+
+.user-no-actions {
+  color: #aaa;
+  text-align: center;
+}
