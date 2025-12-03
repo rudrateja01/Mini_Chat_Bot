@@ -15,7 +15,7 @@ import Settings from "./pages/Admin/Settings/Settings";
 
 import AdminLayout from "./components/Layouts/AdminLayout";
 import { AuthProvider } from "./context/AuthContext";
-import { useAuthContext } from "./Hooks/useAuthContext";
+import { useAuthContext } from "./hooks/useAuthContext";
 
 import UserLayout from "./components/Layouts/UserLayout";
 import UserSettings from "./pages/User/UserSettings/UserSettings";
