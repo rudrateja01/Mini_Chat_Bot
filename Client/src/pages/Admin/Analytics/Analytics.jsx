@@ -1,7 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { getAnalytics } from "../../../api/analytics";
-import { PieChart, Pie, Cell, Tooltip } from "recharts";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid } from "recharts";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+} from "recharts";
+
 
 import "./Analytics.css";
 
