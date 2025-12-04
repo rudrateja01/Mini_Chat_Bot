@@ -80,7 +80,7 @@ export default function MiniChatBox() {
       return;
     }
 
-    const res = await axios.post("http://localhost:4000/api/tickets/public", {
+    const res = await axios.post("https://mini-chat-bot-sv7z.onrender.com/api/tickets/public", {
       name: form.name,
       email: form.email,
       phone: form.phone,

@@ -24,7 +24,7 @@ export default function ContactCenter() {
     const loadUsers = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:4000/api/auth/users", {
+        const res = await fetch("https://mini-chat-bot-sv7z.onrender.com/api/auth/users", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -49,7 +49,7 @@ export default function ContactCenter() {
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(
-        `http://localhost:4000/api/tickets/${selectedTicket.ticketId}/assign`,
+        `https://mini-chat-bot-sv7z.onrender.com/api/tickets/${selectedTicket.ticketId}/assign`,
         {
           method: "POST",
           headers: {
@@ -82,7 +82,7 @@ export default function ContactCenter() {
   const fetchTickets = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:4000/api/tickets", {
+      const res = await fetch("https://mini-chat-bot-sv7z.onrender.com/api/tickets", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -102,7 +102,7 @@ export default function ContactCenter() {
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(
-        `http://localhost:4000/api/tickets/${selectedTicket.ticketId}/status`,
+        `https://mini-chat-bot-sv7z.onrender.com/api/tickets/${selectedTicket.ticketId}/status`,
         {
           method: "POST",
           headers: {
@@ -322,7 +322,7 @@ export default function ContactCenter() {
                     try {
                       const token = localStorage.getItem("token");
                       await fetch(
-                        `http://localhost:4000/api/messages/${selectedTicket.ticketId}/message`,
+                        `https://mini-chat-bot-sv7z.onrender.com/api/messages/${selectedTicket.ticketId}/message`,
                         {
                           method: "POST",
                           headers: {
@@ -360,7 +360,7 @@ export default function ContactCenter() {
                   try {
                     const token = localStorage.getItem("token");
                     await fetch(
-                      `http://localhost:4000/api/messages/${selectedTicket.ticketId}/message`,
+                      `https://mini-chat-bot-sv7z.onrender.com/api/messages/${selectedTicket.ticketId}/message`,
                       {
                         method: "POST",
                         headers: {

@@ -27,7 +27,7 @@ export default function Settings() {
   useEffect(() => {
     const fetchAdmin = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/api/auth/admin", {
+        const res = await axios.get("https://mini-chat-bot-sv7z.onrender.com/api/auth/admin", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -62,7 +62,7 @@ export default function Settings() {
         payload.confirmPassword = settings.confirmPassword;
       }
 
-      await axios.put("http://localhost:4000/api/auth/admin", payload, {
+      await axios.put("https://mini-chat-bot-sv7z.onrender.com/api/auth/admin", payload, {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log(payload);

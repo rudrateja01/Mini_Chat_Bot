@@ -22,12 +22,12 @@ export default function TeamManagement() {
 
     async function fetchData() {
       try {
-        const resUsers = await axios.get("http://localhost:4000/api/auth/users", {
+        const resUsers = await axios.get("https://mini-chat-bot-sv7z.onrender.com/api/auth/users", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUsers(resUsers.data || []);
 
-        const resMe = await axios.get("http://localhost:4000/api/auth/user", {
+        const resMe = await axios.get("https://mini-chat-bot-sv7z.onrender.com/api/auth/user", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setLoggedUser(resMe.data);

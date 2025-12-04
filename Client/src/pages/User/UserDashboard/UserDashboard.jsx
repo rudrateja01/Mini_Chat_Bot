@@ -16,7 +16,7 @@ export default function UserDashboard() {
         const user = JSON.parse(localStorage.getItem("user"));
         if (!user?.token) return;
 
-        const res = await axios.get("http://localhost:4000/api/tickets/assigned", {
+        const res = await axios.get("https://mini-chat-bot-sv7z.onrender.com/api/tickets/assigned", {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
