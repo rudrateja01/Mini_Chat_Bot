@@ -33,7 +33,7 @@
 .row-left {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 50px;
   flex: 1;
 }
 .table-row.header span{
@@ -68,7 +68,7 @@
 }
 
 .col-name {
-  width: 120px;
+  width: 150px;
   text-align: center;
 }
 
