@@ -20,6 +20,8 @@ export default function ContactCenter() {
   const [pendingStatus, setPendingStatus] = useState(null);
   const [restricted, setRestricted] = useState(false);
 
+  const loggedUser = JSON.parse(localStorage.getItem("user"));
+
  useEffect(() => {
   const loadUsers = async () => {
     try {
@@ -158,7 +160,7 @@ export default function ContactCenter() {
       ? ticket.messages[ticket.messages.length - 1].text.slice(0, 30) + "..."
       : "No messages yet";
 
-      const loggedUser = JSON.parse(localStorage.getItem("user"));
+      
 
 
   return (
