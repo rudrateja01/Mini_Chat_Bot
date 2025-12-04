@@ -24,15 +24,20 @@ export default function ContactCenter() {
     const loadUsers = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("https://mini-chat-bot-sv7z.onrender.com/api/auth/users", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-
+        const res = await fetch(
+          "https://mini-chat-bot-sv7z.onrender.com/api/auth/users",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         const data = await res.json();
-        setTeammates(Array.isArray(data) ? data : []);
+        const teammatesList = (Array.isArray(data) ? data : [])
+          .filter((u) => u._id !== loggedUser._id)
+          .filter((u) => u.role !== "user");
 
-        if (Array.isArray(data) && data.length > 0) {
-          setAssignedTeammate(data[0]);
+        setTeammates(teammatesList);
+        if (teammatesList.length > 0) {
+          setAssignedTeammate(teammatesList[0]);
         }
       } catch (err) {
         console.error("Failed to load users:", err);
@@ -41,7 +46,7 @@ export default function ContactCenter() {
     };
 
     loadUsers();
-  }, []);
+  }, [loggedUser._id]);
 
   const handleAssignConfirm = async () => {
     if (!selectedTicket || !pendingTeammate) return;
@@ -82,9 +87,12 @@ export default function ContactCenter() {
   const fetchTickets = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("https://mini-chat-bot-sv7z.onrender.com/api/tickets", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await fetch(
+        "https://mini-chat-bot-sv7z.onrender.com/api/tickets",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       const data = await res.json();
       setTickets(data);
@@ -128,9 +136,9 @@ export default function ContactCenter() {
       );
 
       if (data.ticket.status.toLowerCase() !== "open") {
-        selectTicket(null); 
+        selectTicket(null);
       } else {
-        selectTicket(data.ticket); 
+        selectTicket(data.ticket);
       }
 
       setShowStatusPopup(false);
@@ -143,7 +151,7 @@ export default function ContactCenter() {
     } catch (err) {
       console.error("Failed to update status:", err);
       setShowStatusPopup(false);
-      selectTicket(null); 
+      selectTicket(null);
     }
   };
 
@@ -152,8 +160,7 @@ export default function ContactCenter() {
       ? ticket.messages[ticket.messages.length - 1].text.slice(0, 30) + "..."
       : "No messages yet";
 
-      const loggedUser = JSON.parse(localStorage.getItem("user"));
-
+  const loggedUser = JSON.parse(localStorage.getItem("user"));
 
   return (
     <div className="cc-root">
@@ -169,8 +176,12 @@ export default function ContactCenter() {
 
         {Array.isArray(tickets) &&
           tickets
-            .filter((t) => t.status === "open" && 
-              (t.assignedTo?._id === loggedUser.id || t.assignedTo?._id === loggedUser._id))
+            .filter(
+              (t) =>
+                t.status === "open" &&
+                (t.assignedTo?._id === loggedUser.id ||
+                  t.assignedTo?._id === loggedUser._id)
+            )
             .map((t, idx) => {
               const nameParts = t.user?.name?.split(" ") || [];
               const avatarText = (
@@ -441,32 +452,30 @@ export default function ContactCenter() {
 
           {dropdownOpen && (
             <div className="cc-teammate-dropdown">
-              {teammates.filter((u) => u.role === "user").length > 0 ? (
-                teammates
-                  .filter((u) => u.role === "user")
-                  .map((u) => (
-                    <div
-                      key={u._id}
-                      className="dropdown-option"
-                      onClick={() => {
-                        setPendingTeammate(u);
-                        setShowAssignPopup(true);
-                        setDropdownOpen(false);
-                      }}
-                    >
-                      <div className="cc-avatar-small">
-                        {(u.firstname?.charAt(0) || "").toUpperCase()}
-                        {(u.lastname?.charAt(0) || "").toUpperCase()}
-                      </div>
-                      <div className="dropdown-info">
-                        <span className="dropdown-name">
-                          {u.firstname} {u.lastname}
-                        </span>
-                      </div>
+              {teammates.length > 0 ? (
+                teammates.map((u) => (
+                  <div
+                    key={u._id}
+                    className="dropdown-option"
+                    onClick={() => {
+                      setPendingTeammate(u);
+                      setShowAssignPopup(true);
+                      setDropdownOpen(false);
+                    }}
+                  >
+                    <div className="cc-avatar-small">
+                      {(u.firstname?.charAt(0) || "").toUpperCase()}
+                      {(u.lastname?.charAt(0) || "").toUpperCase()}
                     </div>
-                  ))
+                    <div className="dropdown-info">
+                      <span className="dropdown-name">
+                        {u.firstname} {u.lastname}
+                      </span>
+                    </div>
+                  </div>
+                ))
               ) : (
-                <div className="dropdown-option">No users found</div>
+                <div className="dropdown-option">No teammates found</div>
               )}
             </div>
           )}
@@ -551,7 +560,10 @@ export default function ContactCenter() {
               >
                 Cancel
               </button>
-              <button className="submit-btn" onClick={() => handleStatusConfirm(pendingStatus)}>
+              <button
+                className="submit-btn"
+                onClick={() => handleStatusConfirm(pendingStatus)}
+              >
                 Confirm
               </button>
             </div>
