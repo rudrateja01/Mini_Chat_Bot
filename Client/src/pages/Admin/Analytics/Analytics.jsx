@@ -12,7 +12,6 @@ import {
   Tooltip,
 } from "recharts";
 
-
 import "./Analytics.css";
 
 export default function Analytics() {
@@ -53,24 +52,34 @@ export default function Analytics() {
       <h3 className="analytics-title">Analytics</h3>
 
       {/* Missing Chats */}
-      {data.missingChatsHistory && data.missingChatsHistory.length > 0 && (
-        <div className="linechart-card">
-          <h2>Missed Chats</h2>
+      <div className="linechart-card">
+        <h2>Missed Chats</h2>
 
-          <LineChart width={500} height={200} data={data.missingChatsHistory}>
-            <Line
-              type="monotone"
-              dataKey="count"
-              stroke="#00D907"
-              strokeWidth={4}
-            />
-            <Tooltip />
-            <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-            <XAxis dataKey="week" />
-            <YAxis domain={[0, 25]} ticks={[0, 5, 10, 15,20]} allowDecimals={false} />
-          </LineChart>
-        </div>
-      )}
+        <LineChart
+          width={500}
+          height={200}
+          data={
+            data.missingChatsHistory && data.missingChatsHistory.length > 0
+              ? data.missingChatsHistory
+              : [{ week: "Week 1", count: 0 }]
+          }
+        >
+          <Line
+            type="monotone"
+            dataKey="count"
+            stroke="#00D907"
+            strokeWidth={4}
+          />
+          <Tooltip />
+          <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+          <XAxis dataKey="week" />
+          <YAxis
+            domain={[0, 25]}
+            ticks={[0, 5, 10, 15, 20]}
+            allowDecimals={false}
+          />
+        </LineChart>
+      </div>
 
       <div className="analytics-row">
         <div className="analytics-left">
