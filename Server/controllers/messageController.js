@@ -11,10 +11,11 @@ export const addMessage = async (req, res) => {
 
     if (!ticket) return res.status(404).json({ message: "Ticket not found" });
 
+    const senderId = req.user ? req.user.id : null;
     const msg = await Message.create({
       ticketId: ticket._id,
       text,
-      senderId: req.user.id,
+      senderId,
     });
 
     ticket.messages.push(msg._id);

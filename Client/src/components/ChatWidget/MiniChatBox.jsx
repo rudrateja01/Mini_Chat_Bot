@@ -58,14 +58,13 @@ export default function MiniChatBox() {
       setInput("");
       return;
     }
-
+    // Add user message locally
     setMessages((prev) => [...prev, { sender: "user", text: input }]);
 
     try {
-      await api.post(`/tickets/${ticketId}/message`, {
-        text: input,
-        sender: "user",
-      });
+      if (ticketId) {
+        await api.post(`/tickets/${ticketId}/message`, { text: input,sender:"user" });
+      }
     } catch (err) {
       console.error("Failed to send:", err);
     }
@@ -95,7 +94,7 @@ export default function MiniChatBox() {
 
     // first user message immediately after form submit
     if (firstUserMessage) {
-      await api.post(`/tickets/${newTicketId}/message`, {
+      await axios.post(`https://mini-chat-bot-ax9y.onrender.com/api/tickets/${newTicketId}/message`, {
         text: firstUserMessage,
         sender: "user",
       });
@@ -106,7 +105,7 @@ export default function MiniChatBox() {
         { sender: "bot", text: "Ask me anything!" },
         { sender: "bot", text: "Do you wanna ask something?" },
       ]);
-      setFirstUserMessage(null); // stored first message
+      setFirstUserMessage(null);
     } else {
       setMessages((prev) => [
         ...prev,
