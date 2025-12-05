@@ -153,10 +153,7 @@ export default function ContactCenter() {
         data.ticket.assignedTo?._id &&
           data.ticket.assignedTo._id !== currentUserId
       );
-      // Refresh updated tickets from backend
       await fetchTickets();
-
-      // Remove current selection from UI
       selectTicket(null);
     } catch (err) {
       console.error("Failed to update status:", err);
