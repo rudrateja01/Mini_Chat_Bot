@@ -83,7 +83,7 @@ export default function MiniChatBox() {
       name: form.name,
       email: form.email,
       phone: form.phone,
-      // initialMessage: firstUserMessage,
+      initialMessage: firstUserMessage,
     });
 
     const newTicketId = res.data.ticketId;
