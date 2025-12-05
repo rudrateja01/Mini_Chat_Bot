@@ -7,7 +7,7 @@ import playCircleIcon from "@iconify/icons-mdi/play-circle-outline";
 import closeIcon from "@iconify/icons-mdi/close";
 
 import hublyLogo from "../../assets/logos/hubly.png";
-import rectangle from "../../assets/logos/rectangle.png";
+import rectangle from "../../assets/logos/rectangle.png"
 import msgcard from "../../assets/logos/msgcard.png";
 import analytics from "../../assets/logos/analytics.png";
 import calendar from "../../assets/logos/calendar.png";
