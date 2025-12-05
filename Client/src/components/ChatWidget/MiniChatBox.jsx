@@ -63,7 +63,7 @@ export default function MiniChatBox() {
 
     try {
       if (ticketId) {
-        await api.post(`/tickets/${ticketId}/message`, { text: input });
+        await api.post(`/tickets/${ticketId}/messages`, { text: input });
       }
     } catch (err) {
       console.error("Failed to send:", err);
