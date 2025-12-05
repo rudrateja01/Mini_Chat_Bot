@@ -5,14 +5,14 @@ import dotenv from "dotenv";
 dotenv.config();
 
 // creates admin by default
-const Admin = async () => {
+export const Admin = async () => {
   try {
     const existingAdmin = await User.findOne({ role: "admin" });
     if (!existingAdmin) {
-      const firstname = process.env.ADMIN_FIRSTNAME;
-      const lastname = process.env.ADMIN_LASTNAME;
-      const email = process.env.ADMIN_EMAIL;
-      const password = process.env.ADMIN_PASSWORD;
+      const firstname = process.env.ADMIN_FIRSTNAME || "RUDRA";
+      const lastname = process.env.ADMIN_LASTNAME || "TEJA";
+      const email = process.env.ADMIN_EMAIL || "rudra@admin.com";
+      const password = process.env.ADMIN_PASSWORD || "Admin@123";
       if (!email || !password) return;
       const confirmpassword = password;
       const hashed = await bcrypt.hash(password, 10);
@@ -30,7 +30,6 @@ const Admin = async () => {
     console.error("Failed to create Admin:", err.message);
   }
 };
-Admin();
 
 // Signup
 export const signup = async (req, res) => {
