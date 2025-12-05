@@ -95,7 +95,7 @@ export default function MiniChatBox() {
 
     // first user message immediately after form submit
     if (firstUserMessage) {
-      await api.post(`/tickets/${newTicketId}/messages`, {
+      await api.post(`/tickets/${newTicketId}/message`, {
         text: firstUserMessage,
         sender: "user",
       });
