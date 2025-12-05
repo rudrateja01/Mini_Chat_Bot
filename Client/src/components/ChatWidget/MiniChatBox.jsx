@@ -83,7 +83,7 @@ export default function MiniChatBox() {
       name: form.name,
       email: form.email,
       phone: form.phone,
-      initialMessage: firstUserMessage,
+      // initialMessage: firstUserMessage,
     });
 
     const newTicketId = res.data.ticketId;
@@ -101,7 +101,7 @@ export default function MiniChatBox() {
       ]);
       setFirstUserMessage(null);
     }
-    
+
       setMessages((prev) => [
         ...prev,
         { sender: "bot", text: "How can I help you?" },
