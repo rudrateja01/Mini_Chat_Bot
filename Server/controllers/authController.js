@@ -82,7 +82,7 @@ export const signup = async (req, res) => {
       message: "Signup successful",
       token,
       user: {
-        id: user._id,
+        _id: user._id,
         firstname: user.firstname,
         lastname: user.lastname,
         email: user.email,
@@ -111,7 +111,7 @@ export const login = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { id: user._id, role: user.role },
+      { _id: user._id, role: user.role },
       process.env.JWT_SECRET,
       {
         expiresIn: "7d",
