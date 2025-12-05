@@ -8,6 +8,9 @@ dotenv.config();
 export const Admin = async () => {
   try {
     const existingAdmin = await User.findOne({ role: "admin" });
+    if(existingAdmin){
+      console.log(existingAdmin.email);
+    }
     if (!existingAdmin) {
       const firstname = process.env.ADMIN_FIRSTNAME || "RUDRA";
       const lastname = process.env.ADMIN_LASTNAME || "TEJA";
