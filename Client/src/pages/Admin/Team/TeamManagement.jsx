@@ -27,7 +27,7 @@ export default function TeamPage() {
     const fetchUsers = async () => {
       setLoading(true);
       try {
-        const res = await axios.get("https://mini-chat-bot-sv7z.onrender.com/api/auth/users", {
+        const res = await axios.get("https://mini-chat-bot-ax9y.onrender.com/api/auth/users", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUsers(res.data || []);
@@ -43,7 +43,7 @@ export default function TeamPage() {
 
   const handleAddUser = async () => {
     try {
-      const res = await axios.post("https://mini-chat-bot-sv7z.onrender.com/api/auth/signup", newUser, {
+      const res = await axios.post("https://mini-chat-bot-ax9y.onrender.com/api/auth/signup", newUser, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -67,7 +67,7 @@ export default function TeamPage() {
     if (!selectedUser) return;
     try {
       await axios.delete(
-        `https://mini-chat-bot-sv7z.onrender.com/api/auth/users/${selectedUser._id}`,
+        `https://mini-chat-bot-ax9y.onrender.com/api/auth/users/${selectedUser._id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setUsers(users.filter((u) => u._id !== selectedUser._id));

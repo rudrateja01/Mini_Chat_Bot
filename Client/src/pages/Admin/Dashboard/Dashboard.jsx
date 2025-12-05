@@ -16,7 +16,7 @@ export default function Dashboard() {
         const user = JSON.parse(localStorage.getItem("user"));
         if (!user?.token) return;
 
-        const res = await axios.get("https://mini-chat-bot-sv7z.onrender.com/api/tickets", {
+        const res = await axios.get("https://mini-chat-bot-ax9y.onrender.com/api/tickets", {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },

@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 
-const API_BASE = "https://mini-chat-bot-sv7z.onrender.com/api";
+const API_BASE = "https://mini-chat-bot-ax9y.onrender.com/api";
 
 const ChatContext = createContext();
 

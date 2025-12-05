@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://mini-chat-bot-sv7z.onrender.com/api',
+  baseURL: 'https://mini-chat-bot-ax9y.onrender.com/api',
 });
 
 // Add a request interceptor to include the token

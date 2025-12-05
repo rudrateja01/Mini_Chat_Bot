@@ -7,7 +7,7 @@ const useLogin = () => {
 
   const login = async (EmailID, password) => {
   try {
-    const res = await fetch("https://mini-chat-bot-sv7z.onrender.com/api/auth/login", {
+    const res = await fetch("https://mini-chat-bot-ax9y.onrender.com/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: EmailID, password }),

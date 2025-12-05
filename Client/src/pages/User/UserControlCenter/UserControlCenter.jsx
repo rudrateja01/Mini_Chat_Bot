@@ -25,7 +25,7 @@ export default function UserContactCenter() {
     const loadUsers = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("https://mini-chat-bot-sv7z.onrender.com/api/auth/users", {
+        const res = await fetch("https://mini-chat-bot-ax9y.onrender.com/api/auth/users", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -48,7 +48,7 @@ export default function UserContactCenter() {
   const fetchTickets = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("https://mini-chat-bot-sv7z.onrender.com/api/tickets", {
+      const res = await fetch("https://mini-chat-bot-ax9y.onrender.com/api/tickets", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -68,7 +68,7 @@ export default function UserContactCenter() {
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(
-        `https://mini-chat-bot-sv7z.onrender.com/api/tickets/${selectedTicket.ticketId}/status`,
+        `https://mini-chat-bot-ax9y.onrender.com/api/tickets/${selectedTicket.ticketId}/status`,
         {
           method: "POST",
           headers: {
@@ -289,7 +289,7 @@ export default function UserContactCenter() {
                     try {
                       const token = localStorage.getItem("token");
                       await fetch(
-                        `https://mini-chat-bot-sv7z.onrender.com/api/messages/${selectedTicket.ticketId}/message`,
+                        `https://mini-chat-bot-ax9y.onrender.com/api/messages/${selectedTicket.ticketId}/message`,
                         {
                           method: "POST",
                           headers: {
@@ -327,7 +327,7 @@ export default function UserContactCenter() {
                   try {
                     const token = localStorage.getItem("token");
                     await fetch(
-                      `https://mini-chat-bot-sv7z.onrender.com/api/messages/${selectedTicket.ticketId}/message`,
+                      `https://mini-chat-bot-ax9y.onrender.com/api/messages/${selectedTicket.ticketId}/message`,
                       {
                         method: "POST",
                         headers: {
