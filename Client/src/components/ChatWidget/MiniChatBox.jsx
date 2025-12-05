@@ -62,7 +62,7 @@ export default function MiniChatBox() {
     setMessages((prev) => [...prev, { sender: "user", text: input }]);
 
     try {
-      await api.post(`/tickets/${ticketId}/messages`, {
+      await api.post(`/tickets/${ticketId}/message`, {
         text: input,
         sender: "user",
       });
