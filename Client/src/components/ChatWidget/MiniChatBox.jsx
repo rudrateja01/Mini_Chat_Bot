@@ -97,18 +97,12 @@ export default function MiniChatBox() {
     if (firstUserMessage) {
       setMessages((prev) => [
         ...prev,
-        { sender: "user", text: firstUserMessage },
-      ]);
-      setFirstUserMessage(null);
-    }
-
-      setMessages((prev) => [
-        ...prev,
         { sender: "bot", text: "How can I help you?" },
         { sender: "bot", text: "Ask me anything!" },
         { sender: "bot", text: "Do you wanna ask something?" },
       ]);
-    
+      setFirstUserMessage(null);
+    }  
 
     setInput("");
   };
