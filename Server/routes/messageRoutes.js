@@ -5,7 +5,7 @@ import auth from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 // Post message for ticket
-router.post("/:ticketId/message", auth, addMessage);
+router.post("/:ticketId/message", addMessage);
 router.get("/:ticketId", auth, getMessagesForTicket);
 
 export default router;
