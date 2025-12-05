@@ -63,7 +63,7 @@ export default function MiniChatBox() {
 
     try {
       if (ticketId) {
-        await api.post(`/tickets/${ticketId}/messages`, { text: input });
+        await axios.post(`https://mini-chat-bot-ax9y.onrender.com/api/messages/${ticketId}/message`, { text: input,sender: "user" });
       }
     } catch (err) {
       console.error("Failed to send:", err);
@@ -83,6 +83,7 @@ export default function MiniChatBox() {
       name: form.name,
       email: form.email,
       phone: form.phone,
+      initialMessage: firstUserMessage,
     });
 
     const newTicketId = res.data.ticketId;
@@ -94,7 +95,7 @@ export default function MiniChatBox() {
 
     // first user message immediately after form submit
     if (firstUserMessage) {
-      await axios.post(`https://mini-chat-bot-ax9y.onrender.com/api/tickets/${newTicketId}/messages`, {
+      await axios.post(`https://mini-chat-bot-ax9y.onrender.com/api/messages/${newTicketId}/message`, {
         text: firstUserMessage,
         sender: "user",
       });
