@@ -95,26 +95,20 @@ export default function MiniChatBox() {
 
     // first user message immediately after form submit
     if (firstUserMessage) {
-      await axios.post(`https://mini-chat-bot-ax9y.onrender.com/api/messages/${newTicketId}/message`, {
-        text: firstUserMessage,
-        sender: "user",
-      });
       setMessages((prev) => [
         ...prev,
         { sender: "user", text: firstUserMessage },
-        { sender: "bot", text: "How can I help you?" },
-        { sender: "bot", text: "Ask me anything!" },
-        { sender: "bot", text: "Do you wanna ask something?" },
       ]);
       setFirstUserMessage(null);
-    } else {
+    }
+    
       setMessages((prev) => [
         ...prev,
         { sender: "bot", text: "How can I help you?" },
         { sender: "bot", text: "Ask me anything!" },
         { sender: "bot", text: "Do you wanna ask something?" },
       ]);
-    }
+    
 
     setInput("");
   };
