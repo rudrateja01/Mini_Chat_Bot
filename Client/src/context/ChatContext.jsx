@@ -1,13 +1,11 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 
 const API_BASE = "https://mini-chat-bot-ax9y.onrender.com/api";
-
 const ChatContext = createContext();
 
 export const ChatProvider = ({ children }) => {
-  const [tickets, setTickets] = useState(null);
+  const [tickets, setTickets] = useState([]);
   const [selectedTicket, setSelectedTicket] = useState(null);
-  const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const loadTickets = async () => {
@@ -18,7 +16,6 @@ export const ChatProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
-      // Make sure tickets is always an array
       setTickets(Array.isArray(data) ? data : data.tickets || []);
     } catch (err) {
       console.error("Failed to load tickets:", err);
@@ -28,21 +25,10 @@ export const ChatProvider = ({ children }) => {
     }
   };
 
-  // Select a ticket and load its messages
-  const selectTicket = async (ticket) => {
+  const selectTicket = (ticket) => {
     setSelectedTicket(ticket);
-    setLoading(true);
-    try {
-      setMessages(ticket.messages || []);
-    } catch (err) {
-      console.error("Failed to load messages:", err);
-      setMessages([]);
-    } finally {
-      setLoading(false);
-    }
   };
 
-  // Send a message to the selected ticket
   const sendMessage = async (text) => {
     if (!selectedTicket || !text.trim()) return;
 
@@ -52,8 +38,10 @@ export const ChatProvider = ({ children }) => {
       createdAt: new Date().toISOString(),
     };
 
-    // UI update
-    setMessages((prev) => [...prev, newMsg]);
+    setSelectedTicket((prev) => ({
+      ...prev,
+      messages: [...(prev.messages || []), newMsg],
+    }));
 
     try {
       const token = localStorage.getItem("token");
@@ -80,7 +68,6 @@ export const ChatProvider = ({ children }) => {
         tickets,
         setTickets,
         selectedTicket,
-        messages,
         loading,
         setLoading,
         loadTickets,
@@ -93,5 +80,4 @@ export const ChatProvider = ({ children }) => {
   );
 };
 
-// Custom hook
 export const useChat = () => useContext(ChatContext);

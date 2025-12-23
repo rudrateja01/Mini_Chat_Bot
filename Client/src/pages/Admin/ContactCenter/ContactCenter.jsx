@@ -26,6 +26,11 @@ export default function ContactCenter() {
   const [pendingStatus, setPendingStatus] = useState(null);
   const [restricted, setRestricted] = useState(false);
 
+  useEffect(() => {
+  console.log("Tickets state updated:", tickets);
+}, [tickets]);
+
+
   const loggedUser = JSON.parse(localStorage.getItem("user"));
 
   console.log("Logged user:", loggedUser);
@@ -218,7 +223,7 @@ export default function ContactCenter() {
                 (t) =>
                   t.status === "open" &&
                   t.assignedTo &&
-                  String(t.assignedTo._id) === String(loggedUser.id)
+                  String(t.assignedTo._id) === String(loggedUser._id)
               )
               .map((t, idx) => (
                 <div
