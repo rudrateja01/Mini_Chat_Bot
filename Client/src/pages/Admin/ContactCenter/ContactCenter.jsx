@@ -6,8 +6,14 @@ import homeIcon from "@iconify/icons-mdi/home";
 import sendIcon from "@iconify/icons-mdi/send";
 
 export default function ContactCenter() {
-  const { tickets, setTickets, selectedTicket, loading, selectTicket } =
-    useChat();
+  const {
+    tickets,
+    setTickets,
+    selectedTicket,
+    loading,
+    setLoading,
+    selectTicket,
+  } = useChat();
 
   const [replyText, setReplyText] = useState("");
   const [teammates, setTeammates] = useState([]);
@@ -21,6 +27,9 @@ export default function ContactCenter() {
   const [restricted, setRestricted] = useState(false);
 
   const loggedUser = JSON.parse(localStorage.getItem("user"));
+
+  console.log("Logged user:", loggedUser);
+  console.log("Tickets fetched:", tickets);
 
   useEffect(() => {
     const loadUsers = async () => {
@@ -52,6 +61,47 @@ export default function ContactCenter() {
 
     loadUsers();
   }, [loggedUser._id]);
+  
+  const fetchTickets = async () => {
+    setLoading(true);
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(
+        `https://mini-chat-bot-ax9y.onrender.com/api/tickets`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      const data = await res.json();
+      let fetchedTickets = Array.isArray(data) ? data : data.tickets || [];
+      const adminId = loggedUser._id;
+      fetchedTickets = fetchedTickets.map((t) => {
+        if (t.status === "open" && !t.assignedTo) {
+          return {
+            ...t,
+            assignedTo: {
+              _id: adminId,
+              firstname: loggedUser.firstname,
+              lastname: loggedUser.lastname,
+            },
+          };
+        }
+        return t;
+      });
+
+      setTickets(fetchedTickets);
+    } catch (err) {
+      console.error("Failed to fetch tickets:", err);
+      setTickets([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchTickets();
+  }, []);
+
 
   const handleAssignConfirm = async () => {
     if (!selectedTicket || !pendingTeammate) return;
@@ -83,31 +133,11 @@ export default function ContactCenter() {
       }
 
       selectTicket({ ...selectedTicket, assignedTo: pendingTeammate });
+      await fetchTickets();
     } catch (err) {
       console.error("Failed to assign teammate:", err);
     }
   };
-
-  // refresh tickets
-  const fetchTickets = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const res = await fetch(
-        "https://mini-chat-bot-ax9y.onrender.com/api/tickets",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-
-      const data = await res.json();
-      setTickets(data);
-    } catch (err) {
-      console.error("Failed to fetch tickets:", err);
-    }
-  };
-  useEffect(() => {
-    fetchTickets();
-  }, []);
 
   const handleStatusConfirm = async () => {
     if (!selectedTicket || !pendingStatus) return;
@@ -174,26 +204,23 @@ export default function ContactCenter() {
         <p id="page">Contact Center</p>
         <span>Chats</span>
         <hr />
+
         {loading && <p>Loading chats...</p>}
-        {!loading && (!Array.isArray(tickets) || tickets.length === 0) && (
+        {!loading && (!tickets || tickets.length === 0) && (
           <p>No chats found.</p>
         )}
 
-        {Array.isArray(tickets) &&
-          tickets
-            .filter(
-              (t) =>
-                t.status === "open" &&
-                (t.assignedTo?._id === loggedUser.id ||
-                  t.assignedTo?._id === loggedUser._id)
-            )
-            .map((t, idx) => {
-              const nameParts = t.user?.name?.split(" ") || [];
-              const avatarText = (
-                (nameParts[0]?.[0] || "") + (nameParts[1]?.[0] || "")
-              ).toUpperCase();
-
-              return (
+        {!loading && tickets && tickets.length > 0 && (
+          <>
+            {tickets
+              // Only show tickets that are open AND assigned to the logged-in user
+              .filter(
+                (t) =>
+                  t.status === "open" &&
+                  t.assignedTo &&
+                  String(t.assignedTo._id) === String(loggedUser.id)
+              )
+              .map((t, idx) => (
                 <div
                   key={t._id}
                   className={`cc-chat-item ${
@@ -204,14 +231,20 @@ export default function ContactCenter() {
                     setRestricted(false);
                   }}
                 >
-                  <div className="cc-chat-avatar">{avatarText}</div>
+                  <div className="cc-chat-avatar">
+                    {(
+                      (t.user?.name?.split(" ")[0]?.[0] || "") +
+                      (t.user?.name?.split(" ")[1]?.[0] || "")
+                    ).toUpperCase()}
+                  </div>
                   <div className="cc-chat-info">
                     <p className="cc-chat-title">Chat {idx + 1}</p>
                     <p className="cc-chat-preview">{latestMessage(t)}</p>
                   </div>
                 </div>
-              );
-            })}
+              ))}
+          </>
+        )}
       </div>
 
       {/* CENTER PANEL */}
@@ -457,28 +490,31 @@ export default function ContactCenter() {
 
           {dropdownOpen && (
             <div className="cc-teammate-dropdown">
-              {teammates.length > 0 ? (
-                teammates.map((u) => (
-                  <div
-                    key={u._id}
-                    className="dropdown-option"
-                    onClick={() => {
-                      setPendingTeammate(u);
-                      setShowAssignPopup(true);
-                      setDropdownOpen(false);
-                    }}
-                  >
-                    <div className="cc-avatar-small">
-                      {(u.firstname?.charAt(0) || "").toUpperCase()}
-                      {(u.lastname?.charAt(0) || "").toUpperCase()}
+              {teammates.filter((u) => u._id !== assignedTeammate?._id).length >
+              0 ? (
+                teammates
+                  .filter((u) => u._id !== assignedTeammate?._id)
+                  .map((u) => (
+                    <div
+                      key={u._id}
+                      className="dropdown-option"
+                      onClick={() => {
+                        setPendingTeammate(u);
+                        setShowAssignPopup(true);
+                        setDropdownOpen(false);
+                      }}
+                    >
+                      <div className="cc-avatar-small">
+                        {(u.firstname?.charAt(0) || "").toUpperCase()}
+                        {(u.lastname?.charAt(0) || "").toUpperCase()}
+                      </div>
+                      <div className="dropdown-info">
+                        <span className="dropdown-name">
+                          {u.firstname} {u.lastname}
+                        </span>
+                      </div>
                     </div>
-                    <div className="dropdown-info">
-                      <span className="dropdown-name">
-                        {u.firstname} {u.lastname}
-                      </span>
-                    </div>
-                  </div>
-                ))
+                  ))
               ) : (
                 <div className="dropdown-option">No users found</div>
               )}

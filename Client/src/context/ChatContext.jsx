@@ -5,7 +5,7 @@ const API_BASE = "https://mini-chat-bot-ax9y.onrender.com/api";
 const ChatContext = createContext();
 
 export const ChatProvider = ({ children }) => {
-  const [tickets, setTickets] = useState([]);
+  const [tickets, setTickets] = useState(null);
   const [selectedTicket, setSelectedTicket] = useState(null);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -82,6 +82,7 @@ export const ChatProvider = ({ children }) => {
         selectedTicket,
         messages,
         loading,
+        setLoading,
         loadTickets,
         selectTicket,
         sendMessage,
